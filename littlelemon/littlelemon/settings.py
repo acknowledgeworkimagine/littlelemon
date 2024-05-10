@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'restaurant',
 ]
 
@@ -83,7 +84,9 @@ DATABASES = {
         'HOST' : '127.0.0.1',
         'PORT' : '3306',
         'OPTIONS' : {
-            'init_command' : "SET sql_mode = 'STRICT_TRANS_TABLES'"
+            #handles invalid or missing values from being stored in 
+            #the database by INSERT and UPDATE statements. 
+            'init_command' : "SET sql_mode = 'STATIC_TRANS_TABLES'"
         }        
     }
 }
