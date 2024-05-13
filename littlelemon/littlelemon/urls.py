@@ -21,18 +21,18 @@ from rest_framework.routers import DefaultRouter
 from restaurant.views import BookingViewSet, UserViewSet
 
 router_booking = DefaultRouter()
-router_booking.register(r'tables', BookingViewSet)
+router_booking.register(r'booking', BookingViewSet)
 
 
 router_user_reg = DefaultRouter()
-router_user_reg.register(r'users', UserViewSet)
+router_user_reg.register(r'registration', UserViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('restaurant/', include('restaurant.urls')),
     
     path('restaurant/booking/', include(router_booking.urls)),
-    path('api-auth/', include(router_user_reg.urls)),
+    path('restaurant/registration/', include(router_user_reg.urls)),
     
     path('auth/', include('djoser.urls')),
     # http://127.0.0.1:8000/auth/token/login/
