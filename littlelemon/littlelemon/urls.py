@@ -17,7 +17,26 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from rest_framework.routers import DefaultRouter
+from restaurant.views import BookingViewSet, UserViewSet
+
+router_booking = DefaultRouter()
+router_booking.register(r'tables', BookingViewSet)
+
+
+router_user_reg = DefaultRouter()
+router_user_reg.register(r'users', UserViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('restaurant/', include('restaurant.urls'))
+    path('restaurant/', include('restaurant.urls')),
+    
+    path('restaurant/booking/', include(router_booking.urls)),
+    path('api-auth/', include(router_user_reg.urls)),
+    
+    path('auth/', include('djoser.urls')),
+    # http://127.0.0.1:8000/auth/token/login/
+    path('auth/', include('djoser.urls.authtoken')), 
+    
+    
 ]

@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
     'restaurant',
+    'djoser',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +86,8 @@ DATABASES = {
         'HOST' : '127.0.0.1',
         'PORT' : '3306',
         'OPTIONS' : {
+            #handles invalid or missing values from being stored in 
+            #the database by INSERT and UPDATE statements. 
             'init_command' : "SET sql_mode = 'STRICT_TRANS_TABLES'"
         }        
     }
@@ -123,12 +128,31 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'restaurant/static/'
+STATIC_URL = 'littlelemon/restaurant/static/'
 STATICFILES_DIRS = [
-    "restaurant/static/",
+    "littlelemon/restaurant/static/",
     ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+REST_FRAMEWORK = {
+    
+    'DEFAULT_RENDERER_CLASSES' : [
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer', 
+        'rest_framework_xml.renderers.XMLRenderer',      
+    ],
+        
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
+
+DJOSER = {
+    "USER_ID_FIELD":"username"
+}
